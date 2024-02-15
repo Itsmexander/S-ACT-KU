@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class Activity {
     @Id
     @Column(name = "ActivityID")
-    private long activityID;
+    private String activityID;
     @Column(name = "ProjectNameTH")
     private String projNameTH;
     @Column(name = "ProjectNameEN")

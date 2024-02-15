@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 //import org.springframework.data.annotation.LastModifiedBy;
 //import org.springframework.data.annotation.LastModifiedDate;
 //import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,8 +31,10 @@ public class User {
     private String accountType;
     @Column(name = "Name")
     private String name;
-    @Column(name = "PhoneNum")
+    @Column(name = "TelNo")
     private String telNo;
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
 //    @LastModifiedDate
 //    @Column(name = "LastModifiedTimeStamp")
 //    public LocalDateTime lastUpdateTimestamp;
