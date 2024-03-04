@@ -4,7 +4,7 @@
 # ENTRYPOINT ["java","-jar","/app.jar"]
 
 FROM maven:3.8.1-openjdk-17-slim
-RUN mvn clean package -DskipTests
+RUN mvn package -DskipTests
 EXPOSE 18080
 ENTRYPOINT ["java","-jar","target/OnlinePrototype-0.0.1-SNAPSHOT.jar"]
 
