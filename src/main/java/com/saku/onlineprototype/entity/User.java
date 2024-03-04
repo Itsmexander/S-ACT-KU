@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 //@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
-    @Column(name = "UID")
-    private String uID;
+    @Column(name = "uid")
+    private String uid;
     @Column(name = "AccountType")
     private String accountType;
     @Column(name = "Name")
