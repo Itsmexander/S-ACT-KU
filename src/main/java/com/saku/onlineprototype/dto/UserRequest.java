@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -20,5 +22,6 @@ public class UserRequest {
     private String accountType;
     private String name;
     private String telNo;
+    private LocalDateTime createDate;
 
 }

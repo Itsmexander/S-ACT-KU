@@ -45,7 +45,7 @@ public class Activity {
     @Column(name = "AllocatedMoney(Ex)")
     private double allocatedMoneyEx;
     @Column(name = "UsedAllocate")
-    private double useAllocate;
+    private double usedAllocate;
     @Column(name = "StaffTargetNum")
     private int staffTargetNum;
     @Column(name = "AttendTargetNum")

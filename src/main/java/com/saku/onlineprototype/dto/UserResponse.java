@@ -27,7 +27,7 @@ public class UserResponse {
 
     public static UserResponse from(User user){
         return new UserResponse()
-                .setUID(user.getUID())
+                .setUID(user.getUid())
                 .setName(user.getName())
                 .setAccountType(user.getAccountType())
                 .setTelNo(user.getTelNo())
