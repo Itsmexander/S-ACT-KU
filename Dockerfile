@@ -5,5 +5,5 @@
 
 FROM openjdk:17-jdk-slim
 COPY target/OnlinePrototype-0.0.1-SNAPSHOT.jar OnlinePrototype-0.0.1-SNAPSHOT.jar 
-EXPOSE 8090
+EXPOSE 18080
 ENTRYPOINT ["java","-jar","/OnlinePrototype-0.0.1-SNAPSHOT.jar"]
