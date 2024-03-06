@@ -1,15 +1,16 @@
 package com.saku.onlineprototype.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.saku.onlineprototype.Enum.Faculty;
+import com.saku.onlineprototype.Enum.Role;
+import jakarta.persistence.*;
 //    TODO: lastUpdateBy,lastUpdateTimestamp
 //import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.naming.Name;
 import java.time.LocalDateTime;
 //import org.springframework.data.annotation.LastModifiedBy;
 //import org.springframework.data.annotation.LastModifiedDate;
@@ -27,14 +28,23 @@ public class User {
     @Id
     @Column(name = "uid")
     private String uid;
-    @Column(name = "AccountType")
-    private String accountType;
+    @Column(name = "password")
+    private String password;
     @Column(name = "Name")
     private String name;
     @Column(name = "TelNo")
     private String telNo;
     @Column(name = "CreateDate")
     private LocalDateTime createDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name= "role")
+    private Role role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "faculty")
+    private Faculty faculty;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Org",nullable = false)
+    private Organization org;
 //    @LastModifiedDate
 //    @Column(name = "LastModifiedTimeStamp")
 //    public LocalDateTime lastUpdateTimestamp;

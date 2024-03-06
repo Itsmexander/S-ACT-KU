@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 public class Item{
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "ActivityID")
-    private String activityID;
+    private Activity activityID;
     @Column(name="itemNumber")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int itemNumber;
