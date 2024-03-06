@@ -1,12 +1,12 @@
 package com.saku.onlineprototype.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,4 +31,7 @@ public class Organization {
     private String email;
     @Column(name = "telNO")
     private String telNo;
+    @OneToMany(fetch = FetchType.LAZY,)
+    @JoinColumn(name = "users",nullable = false)
+    private List<User> userList;
 }
