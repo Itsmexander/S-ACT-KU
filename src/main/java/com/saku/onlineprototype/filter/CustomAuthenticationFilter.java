@@ -1,11 +1,10 @@
 package com.saku.onlineprototype.filter;
 
-import com.axonstech.shop.management.dto.UserDto;
-import com.axonstech.shop.management.security.dto.CustomUser;
-import com.axonstech.shop.management.security.dto.TokenConfiguration;
-import com.axonstech.shop.management.security.dto.UserRequestInfo;
-import com.axonstech.shop.management.security.util.JwtService;
+import com.saku.onlineprototype.dto.*;
+
+import com.saku.onlineprototype.dto.UserRequestInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saku.onlineprototype.security.JwtService;
 import com.saku.onlineprototype.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

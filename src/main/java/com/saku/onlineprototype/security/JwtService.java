@@ -1,7 +1,14 @@
 package com.saku.onlineprototype.security;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nimbusds.jose.Algorithm;
+import com.saku.onlineprototype.dto.CustomPrinciple;
+import com.saku.onlineprototype.dto.TokenConfiguration;
+import com.saku.onlineprototype.dto.UserDto;
 import com.saku.onlineprototype.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,8 +16,6 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
-
-import static com.nimbusds.oauth2.sdk.ResponseMode.JWT;
 
 @Component
 @RequiredArgsConstructor
@@ -59,4 +64,6 @@ public class JwtService {
                 .setUsername(userDto.getUsername())
                 .setLang(userDto.getLang());
     }
+
 }
+

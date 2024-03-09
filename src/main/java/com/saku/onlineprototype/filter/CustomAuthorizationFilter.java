@@ -4,9 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.axonstech.shop.management.security.dto.CustomPrinciple;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saku.onlineprototype.dto.CustomPrinciple;
 import com.saku.onlineprototype.dto.TokenConfiguration;
 import com.saku.onlineprototype.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.nimbusds.oauth2.sdk.ResponseMode.JWT;
+
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

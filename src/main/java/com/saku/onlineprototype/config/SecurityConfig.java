@@ -1,9 +1,10 @@
 package com.saku.onlineprototype.config;
-import com.axonstech.shop.management.security.dto.TokenConfiguration;
-import com.axonstech.shop.management.security.filter.CustomAuthenticationFilter;
-import com.axonstech.shop.management.security.filter.CustomAuthorizationFilter;
-import com.axonstech.shop.management.security.service.UserService;
-import com.axonstech.shop.management.security.util.JwtService;
+
+import com.saku.onlineprototype.dto.TokenConfiguration;
+import com.saku.onlineprototype.filter.CustomAuthenticationFilter;
+import com.saku.onlineprototype.filter.CustomAuthorizationFilter;
+import com.saku.onlineprototype.security.JwtService;
+import com.saku.onlineprototype.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -61,20 +62,33 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManagerBean, UserService userService, JwtService jwtService) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean, userService, jwtService);
-        customAuthenticationFilter.setFilterProcessesUrl("/api/login");
-        http.csrf().disable();
-        http.cors();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeHttpRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
-        http.authorizeHttpRequests().antMatchers("/api/test").permitAll();
-        http.authorizeHttpRequests().antMatchers("/api/users/**").permitAll();
-        http.authorizeHttpRequests().antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
-        http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAuthority("ROLE_ADMIN");
-        http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/role/**").hasAuthority("ROLE_ADMIN");
-        http.authorizeHttpRequests().anyRequest().authenticated();
-        http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore(new CustomAuthorizationFilter(tokenConfiguration(), jwtService), UsernamePasswordAuthenticationFilter.class);
+
+//        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean, userService, jwtService);
+//        customAuthenticationFilter.setFilterProcessesUrl("/api/login");
+//        http.csrf();
+//        http.cors();
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.authorizeHttpRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
+//        http.authorizeHttpRequests().antMatchers("/api/test").permitAll();
+//        http.authorizeHttpRequests().antMatchers("/api/users/**").permitAll();
+//        http.authorizeHttpRequests().antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
+//        http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAuthority("ROLE_ADMIN");
+//        http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/role/**").hasAuthority("ROLE_ADMIN");
+//        http.authorizeHttpRequests().anyRequest().authenticated();
+//        http.addFilter(customAuthenticationFilter);
+//        http.addFilterBefore(new CustomAuthorizationFilter(tokenConfiguration(), jwtService), UsernamePasswordAuthenticationFilter.class);
+//        return http.build();
+        http
+                .csrf((csrf) -> csrf
+                        .ignoringRequestMatchers("/no-csrf")
+                )
+                .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/api/login/**", "/api/token/refresh/**","/api/test",
+                                "/api/users/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/user/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/role/**").hasAuthority("ROLE_ADMIN")
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
 
@@ -88,21 +102,21 @@ public class SecurityConfig {
         return new TokenConfiguration().setSecretKey(tokenSecret).setAccessTimeout(accessTimeout).setRefreshTimeout(refreshTimeout);
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
-    @Bean
-    public AuditorAware auditorAware() {
-        return new SpringSecurityAuditorAware();
-    }
+//    @Bean
+//    public AuditorAware auditorAware() {
+//        return new SpringSecurityAuditorAware();
+//    }
 
 }
