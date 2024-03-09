@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
@@ -47,8 +48,9 @@ public class UserServiceImpl implements UserService{
     public UserResponse updateUser(String uID, UserRequest request) {
         User user = userRepository.findById(uID).orElseThrow();
         user.setName(request.getName());
-        user.setAccountType(request.getAccountType());
         user.setTelNo(request.getTelNo());
+        user.setLastupdatetimestamp(LocalDateTime.now());
+        user
         return null;
     }
 

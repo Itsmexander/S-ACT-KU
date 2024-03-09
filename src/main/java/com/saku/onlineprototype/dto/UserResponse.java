@@ -2,6 +2,9 @@ package com.saku.onlineprototype.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.saku.onlineprototype.Enum.Faculty;
+import com.saku.onlineprototype.Enum.Role;
+import com.saku.onlineprototype.entity.Organization;
 import com.saku.onlineprototype.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,17 +23,25 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserResponse {
     private String uID;
-    private String accountType;
+    private String password;
     private String name;
     private String telNo;
     private LocalDateTime createDate;
+    private LocalDateTime lastupdatetimestamp;
+    private Role role;
+    private Faculty faculty;
+    private Organization org;
 
     public static UserResponse from(User user){
         return new UserResponse()
                 .setUID(user.getUid())
                 .setName(user.getName())
-                .setAccountType(user.getAccountType())
+                .setPassword(user.getPassword())
                 .setTelNo(user.getTelNo())
-                .setCreateDate(user.getCreateDate());
+                .setCreateDate(user.getCreateDate())
+                .setLastupdatetimestamp(user.getLastupdatetimestamp())
+                .setRole(user.getRole())
+                .setFaculty(user.getFaculty())
+                .setOrg(user.getOrg());
     }
 }

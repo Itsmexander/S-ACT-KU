@@ -31,7 +31,7 @@ public class Organization {
     private String email;
     @Column(name = "telNO")
     private String telNo;
-    @OneToMany(fetch = FetchType.LAZY,)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "users",nullable = false)
     private List<User> userList;
 }

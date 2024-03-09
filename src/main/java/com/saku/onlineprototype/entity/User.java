@@ -36,6 +36,8 @@ public class User {
     private String telNo;
     @Column(name = "CreateDate")
     private LocalDateTime createDate;
+    @Column(name = "LastUpdateTimestamp")
+    private LocalDateTime lastupdatetimestamp;
     @Enumerated(EnumType.STRING)
     @Column(name= "role")
     private Role role;
