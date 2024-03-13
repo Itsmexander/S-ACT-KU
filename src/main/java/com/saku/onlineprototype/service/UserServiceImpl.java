@@ -1,6 +1,8 @@
 package com.saku.onlineprototype.service;
 
+import com.saku.onlineprototype.dto.UserDto;
 import com.saku.onlineprototype.dto.UserRequest;
+import com.saku.onlineprototype.dto.UserRequestInfo;
 import com.saku.onlineprototype.dto.UserResponse;
 import com.saku.onlineprototype.entity.User;
 import com.saku.onlineprototype.repository.UserRepository;
@@ -50,13 +52,13 @@ public class UserServiceImpl implements UserService{
         user.setName(request.getName());
         user.setTelNo(request.getTelNo());
         user.setLastupdatetimestamp(LocalDateTime.now());
-        user
+        user.setOrg(request.getOrg());
         return null;
     }
 
     @Override
     public List<User> getAllUser() {
-        log.info("Fetching all Catalogs");
+        log.info("Fetching all User");
         return userRepository.findAll();
     }
 
@@ -64,5 +66,24 @@ public class UserServiceImpl implements UserService{
     public boolean checkLoginAttempt(String ipAddress) {
         return true;
     }
+
+    @Override
+    public void loginSuccess(UserRequestInfo userRequestInfo) {
+
+    }
+
+    @Override
+    public void loginFail(UserRequestInfo userRequestInfo) {
+
+    }
+
+    @Override
+    public UserDto getUserInfo(String username) {
+        return null;
+    }
+//    @Override
+//    public UserResponse changePassword(String oldPassword,String newPassword){
+//
+//    }
 
 }

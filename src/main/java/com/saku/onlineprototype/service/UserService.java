@@ -24,4 +24,5 @@ public interface UserService {
     void loginFail(UserRequestInfo userRequestInfo);
 
     UserDto getUserInfo(String username);
+//    UserResponse changePassword(String Password);
 }

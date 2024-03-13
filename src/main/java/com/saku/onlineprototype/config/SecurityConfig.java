@@ -1,15 +1,12 @@
 package com.saku.onlineprototype.config;
 
 import com.saku.onlineprototype.dto.TokenConfiguration;
-import com.saku.onlineprototype.filter.CustomAuthenticationFilter;
-import com.saku.onlineprototype.filter.CustomAuthorizationFilter;
 import com.saku.onlineprototype.security.JwtService;
 import com.saku.onlineprototype.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,12 +15,10 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -79,10 +74,10 @@ public class SecurityConfig {
 //        http.addFilterBefore(new CustomAuthorizationFilter(tokenConfiguration(), jwtService), UsernamePasswordAuthenticationFilter.class);
 //        return http.build();
         http
-                .csrf((csrf) -> csrf
+                .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/no-csrf")
                 )
-                .authorizeHttpRequests((authz) -> authz
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login/**", "/api/token/refresh/**","/api/test",
                                 "/api/users/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/user/**").hasAuthority("ROLE_ADMIN")
@@ -102,17 +97,17 @@ public class SecurityConfig {
         return new TokenConfiguration().setSecretKey(tokenSecret).setAccessTimeout(accessTimeout).setRefreshTimeout(refreshTimeout);
     }
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowCredentials(true);
-//        configuration.setAllowedOrigins(Arrays.asList("*"));
-//        configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 //    @Bean
 //    public AuditorAware auditorAware() {
