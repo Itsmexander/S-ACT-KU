@@ -21,6 +21,8 @@ public class Activity {
     @Id
     @Column(name = "ActivityID")
     private String activityID;
+    @Column(name = "status")
+    private String status;
     @Column(name = "ProjectNameTH")
     private String projNameTH;
     @Column(name = "ProjectNameEN")

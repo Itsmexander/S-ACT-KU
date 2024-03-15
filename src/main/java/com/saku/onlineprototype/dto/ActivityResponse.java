@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivityResponse {
     private String activityID;
+    private String status;
     private String projNameTH;
     private String projNameEN;
     private String orgType;

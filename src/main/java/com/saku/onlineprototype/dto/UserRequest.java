@@ -3,6 +3,7 @@ package com.saku.onlineprototype.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.saku.onlineprototype.Enum.Faculty;
+import com.saku.onlineprototype.Enum.Position;
 import com.saku.onlineprototype.Enum.Role;
 import com.saku.onlineprototype.entity.Organization;
 import lombok.Getter;
@@ -30,5 +31,5 @@ public class UserRequest {
     private Role role;
     private Faculty faculty;
     private Organization org;
-
+    private Position position;
 }

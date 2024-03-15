@@ -1,4 +1,4 @@
-package com.saku.onlineprototype.service;
+//package com.saku.onlineprototype.service;
 //    TODO: lastUpdateBy,lastUpdateTimestamp
 
 //import org.springframework.data.domain.AuditorAware;

@@ -1,15 +1,19 @@
-//package com.saku.onlineprototype.controller;
-//
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//
-//@Controller
-//public class AuthController {
-//
+package com.saku.onlineprototype.controller;
+
+import com.saku.onlineprototype.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class AuthController {
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/auth/check")
+    public boolean checkUID(@RequestBody String uid) {
+        return userRepository.findById(uid).isPresent();
+    }
 //    @GetMapping("/login")
 //    public String loginView() {
 //        return "login"; // return login.html
@@ -28,4 +32,4 @@
 //        // practice to show the login screen again.
 //        return "redirect:/login?logout";
 //    }
-//}
+}

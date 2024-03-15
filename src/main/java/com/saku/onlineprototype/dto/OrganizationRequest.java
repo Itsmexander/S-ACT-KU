@@ -2,6 +2,7 @@ package com.saku.onlineprototype.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.saku.onlineprototype.entity.Activity;
 import com.saku.onlineprototype.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,6 @@ public class OrganizationRequest {
     private String email;
     private String telNo;
     private List<User> userList;
+    private List<Activity> activityList;
+    private List<Activity> approvedActivityList;
 }

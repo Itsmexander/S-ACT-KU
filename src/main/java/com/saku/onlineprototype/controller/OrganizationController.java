@@ -9,25 +9,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/organization")
 @RequiredArgsConstructor
 public class OrganizationController {
 
     private final OrganizationService organizationService;
 
-    @GetMapping("/organization/{orgID}")
+    @GetMapping("/{orgID}")
     public ResponseEntity<OrganizationResponse> getOrganization(@PathVariable String orgID){
         OrganizationResponse response = organizationService.getOrganization(orgID);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("/organization")
+    @PostMapping("")
     public ResponseEntity<OrganizationResponse> createOrganization(@RequestBody OrganizationRequest request){
         OrganizationResponse response = organizationService.createOrganization(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/organization/{orgID}")
+    @PutMapping("/{orgID}")
     public ResponseEntity<OrganizationResponse> updateOrganization(@PathVariable String orgID,
                                                                    @RequestBody OrganizationRequest request){
         OrganizationResponse response = organizationService.updateOrganization(orgID, request);

@@ -2,12 +2,15 @@ package com.saku.onlineprototype.service;
 
 import com.saku.onlineprototype.dto.OrganizationRequest;
 import com.saku.onlineprototype.dto.OrganizationResponse;
+import com.saku.onlineprototype.entity.Organization;
 import com.saku.onlineprototype.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,4 +35,5 @@ public class OrganizationServiceImpl implements OrganizationService{
     public OrganizationResponse updateOrganization(String orgID, OrganizationRequest organizationRequest) {
         return null;
     }
+    public List<Organization> getAllOrganiztions(){return organizationRepository.findAll();}
 }

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class ActivityRequest {
 
     private String activityID;
+    private String status;
     private String projNameTH;
     private String projNameEN;
     private String orgType;

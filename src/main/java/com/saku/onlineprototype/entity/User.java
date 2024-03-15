@@ -1,6 +1,7 @@
 package com.saku.onlineprototype.entity;
 
 import com.saku.onlineprototype.Enum.Faculty;
+import com.saku.onlineprototype.Enum.Position;
 import com.saku.onlineprototype.Enum.Role;
 import jakarta.persistence.*;
 //    TODO: lastUpdateBy,lastUpdateTimestamp
@@ -10,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.naming.Name;
 import java.time.LocalDateTime;
 //import org.springframework.data.annotation.LastModifiedBy;
 //import org.springframework.data.annotation.LastModifiedDate;
@@ -47,6 +47,8 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Org",nullable = false)
     private Organization org;
+    @Column(name = "postition")
+    private Position position;
 //    @LastModifiedDate
 //    @Column(name = "LastModifiedTimeStamp")
 //    public LocalDateTime lastUpdateTimestamp;

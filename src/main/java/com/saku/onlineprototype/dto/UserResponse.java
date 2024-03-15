@@ -3,6 +3,7 @@ package com.saku.onlineprototype.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.saku.onlineprototype.Enum.Faculty;
+import com.saku.onlineprototype.Enum.Position;
 import com.saku.onlineprototype.Enum.Role;
 import com.saku.onlineprototype.entity.Organization;
 import com.saku.onlineprototype.entity.User;
@@ -31,6 +32,8 @@ public class UserResponse {
     private Role role;
     private Faculty faculty;
     private Organization org;
+    private Position position;
+
 
     public static UserResponse from(User user){
         return new UserResponse()
@@ -42,6 +45,7 @@ public class UserResponse {
                 .setLastupdatetimestamp(user.getLastupdatetimestamp())
                 .setRole(user.getRole())
                 .setFaculty(user.getFaculty())
-                .setOrg(user.getOrg());
+                .setOrg(user.getOrg())
+                .setPosition(user.getPosition());
     }
 }

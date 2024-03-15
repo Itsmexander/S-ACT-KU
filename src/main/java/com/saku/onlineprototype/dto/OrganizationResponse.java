@@ -2,6 +2,7 @@ package com.saku.onlineprototype.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.saku.onlineprototype.entity.Activity;
 import com.saku.onlineprototype.entity.Organization;
 import com.saku.onlineprototype.entity.User;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public class OrganizationResponse {
     private String email;
     private String telNo;
     private List<User> userList;
+    private List<Activity> activityList;
+    private List<Activity> approvedActivityList;
     public static OrganizationResponse from(Organization organization){
         return new OrganizationResponse()
                 .setOrgID(organization.getOrgID())
@@ -39,6 +42,8 @@ public class OrganizationResponse {
                 .setOrgAvsName(organization.getOrgAvsName())
                 .setEmail(organization.getEmail())
                 .setTelNo(organization.getTelNo())
-                .setUserList(organization.getUserList());
+                .setUserList(organization.getUserList())
+                .setActivityList(organization.getActivityList())
+                .setApprovedActivityList(organization.getApprovedActivityList());
     }
 }

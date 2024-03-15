@@ -34,4 +34,10 @@ public class Organization {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "users",nullable = false)
     private List<User> userList;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OrgActivityList")
+    private List<Activity> activityList;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ApprovedActivityList")
+    private List<Activity> approvedActivityList;
 }
