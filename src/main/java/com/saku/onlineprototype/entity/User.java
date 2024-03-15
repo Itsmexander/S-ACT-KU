@@ -37,7 +37,7 @@ public class User {
     @Column(name = "CreateDate")
     private LocalDateTime createDate;
     @Column(name = "LastUpdateTimestamp")
-    private LocalDateTime lastupdatetimestamp;
+    private LocalDateTime lastUpdateTimestamp;
     @Enumerated(EnumType.STRING)
     @Column(name= "role")
     private Role role;
