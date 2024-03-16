@@ -53,6 +53,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "position")
     private Position position;
+    private String password;
 //    @LastModifiedDate
 //    @Column(name = "LastModifiedTimeStamp")
 //    public LocalDateTime lastUpdateTimestamp;

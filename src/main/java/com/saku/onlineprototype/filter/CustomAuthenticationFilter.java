@@ -1,33 +1,57 @@
-//package com.saku.onlineprototype.filter;
-//
-//import com.saku.onlineprototype.dto.*;
-//
+package com.saku.onlineprototype.filter;
+
 //import com.saku.onlineprototype.dto.UserRequestInfo;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.saku.onlineprototype.security.JwtService;
-//import com.saku.onlineprototype.service.UserService;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.AuthenticationException;
-//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-//
-//import jakarta.servlet.FilterChain;
-//import jakarta.servlet.ServletException;
-//import jakarta.servlet.http.HttpServletRequest;
-//import jakarta.servlet.http.HttpServletResponse;
-//import java.io.IOException;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-//
-//
-//@Slf4j
-//public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-//
+import com.saku.onlineprototype.service.JwtService;
+import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.Date;
+
+
+@Slf4j
+@Component
+public class CustomAuthenticationFilter extends OncePerRequestFilter {
+
+    @Autowired private JwtService jwtService;
+    @Autowired private UserDetailsService userDetailsService;
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            final String authorization = request.getHeader("Authorization");
+            if (authorization != null && authorization.startsWith("Bearer ")) {
+                final String token = authorization.substring(7);
+                final Claims claims = jwtService.getClaims(token);
+                if (claims.getExpiration().after(new Date())) {
+
+                    final String username = claims.getSubject();
+                    final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+                    final UsernamePasswordAuthenticationToken authToken =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails, null, userDetails.getAuthorities());
+
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+            }
+        }
+        filterChain.doFilter(request, response);
+    }
+
 //    private final AuthenticationManager authenticationManager;
 //    private final UserService userService;
 //    private final JwtService jwtService;
@@ -91,5 +115,5 @@
 //                .setBrowser(browser);
 //
 //    }
-//}
-//
+}
+

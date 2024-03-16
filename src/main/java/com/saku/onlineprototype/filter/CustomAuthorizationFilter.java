@@ -7,7 +7,7 @@
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.saku.onlineprototype.dto.CustomPrinciple;
 //import com.saku.onlineprototype.dto.TokenConfiguration;
-//import com.saku.onlineprototype.security.JwtService;
+//import com.saku.onlineprototype.service.JwtService;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;

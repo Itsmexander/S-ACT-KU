@@ -37,4 +37,5 @@ public class UserRequest {
     private Role role;
     private Organization org;
     private Position position;
+    private String password;
 }

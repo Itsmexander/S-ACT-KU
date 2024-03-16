@@ -1,28 +1,43 @@
-//package com.saku.onlineprototype.security;
-//
-//import com.auth0.jwt.JWT;
-//import com.auth0.jwt.JWTVerifier;
-//import com.auth0.jwt.algorithms.Algorithm;
-//import com.auth0.jwt.interfaces.Claim;
-//import com.auth0.jwt.interfaces.DecodedJWT;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.saku.onlineprototype.dto.CustomPrinciple;
+package com.saku.onlineprototype.service;
+
 //import com.saku.onlineprototype.dto.TokenConfiguration;
-//import com.saku.onlineprototype.dto.UserDto;
-//import com.saku.onlineprototype.service.UserService;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.stereotype.Component;
-//
-//import java.util.Arrays;
-//import java.util.Date;
-//import java.util.Map;
-//
-//@Component
-//@RequiredArgsConstructor
-//public class JwtService {
-//    private final UserService userService;
-//    private final TokenConfiguration tokenConfiguration;
-//
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import java.util.Date;
+
+@Service
+@RequiredArgsConstructor
+public class JwtService {
+
+    private final UserService userService;
+
+    @Value("${jwt.secret.key}") private String secretKey;
+    @Value("${jwt.expiration}") private Long expiration;
+
+    private SecretKey getKey() {
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getKey(), SignatureAlgorithm.HS512)
+                .compact();
+    }
+
+    public Claims getClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
+    }
+
 //    public String getAccessToken(String issuer, String username) {
 //        Algorithm algorithm = Algorithm.HMAC256(tokenConfiguration.getSecretKey().getBytes());
 //        UserDto userInfo = userService.getUserInfo(username);
@@ -64,6 +79,7 @@
 //                .setUsername(userDto.getUsername())
 //                .setLang(userDto.getLang());
 //    }
-//
-//}
-//
+
+
+}
+
