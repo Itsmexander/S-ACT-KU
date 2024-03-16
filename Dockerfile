@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=build /app/target/OnlinePrototype-0.0.1-SNAPSHOT.jar .
 EXPOSE 18080
 # Set the command to run the application
-CMD ["java", "-jar", "/OnlinePrototype-0.0.1-SNAPSHOT.jar"]
+CMD ["java -jar /OnlinePrototype-0.0.1-SNAPSHOT.jar"]
