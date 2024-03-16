@@ -1,6 +1,7 @@
 package com.saku.onlineprototype.service;
 
 //import com.saku.onlineprototype.dto.UserDto;
+import com.saku.onlineprototype.dto.UserDao;
 import com.saku.onlineprototype.dto.UserRequest;
 //import com.saku.onlineprototype.dto.UserRequestInfo;
 import com.saku.onlineprototype.dto.UserResponse;
@@ -9,23 +10,38 @@ import com.saku.onlineprototype.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
-@Service
+@Service(value = "userService")
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
+
     @Autowired
-    private final UserRepository userRepository;
+    private RoleService roleService;
+    @Autowired
+    private final UserDao userDao;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bcryptEncoder;
+
 
     @Override
     public User saveUser(User user) {
@@ -65,7 +81,21 @@ public class UserServiceImpl implements UserService{
         log.info("Fetching all User");
         return userRepository.findAll();
     }
+    public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
+        User user = userDao.findByUid(uid);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUid(),user.getPassword(), getAuthority(user));
+    }
 
+    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        user.getRole().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        });
+        return authorities;
+    }
 //    @Override
 //    public boolean checkLoginAttempt(String ipAddress) {
 //        return true;

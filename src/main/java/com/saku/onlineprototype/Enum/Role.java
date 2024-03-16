@@ -1,5 +1,5 @@
-package com.saku.onlineprototype.Enum;
-
-public enum Role {
-    STUDENT, SC, SAB, SD;
-}
+//package com.saku.onlineprototype.Enum;
+//
+//public enum Role {
+//    STUDENT, SC, SAB, SD;
+//}

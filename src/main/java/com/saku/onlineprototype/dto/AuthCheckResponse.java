@@ -2,6 +2,7 @@ package com.saku.onlineprototype.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.saku.onlineprototype.entity.Role;
 import com.saku.onlineprototype.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class AuthCheckResponse {
                 .setTelNo(user.getTelNo())
                 .setCreateDate(user.getCreateDate())
                 .setLastUpdateTimestamp(user.getLastUpdateTimestamp())
-                .setRole(user.getRole())
+                .setRole((Role)user.getRole())
                 .setFaculty(user.getFaculty())
                 .setOrg(user.getOrg())
                 .setPosition(user.getPosition());

@@ -4,18 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 //import com.saku.onlineprototype.Enum.Faculty;
 import com.saku.onlineprototype.Enum.Position;
-import com.saku.onlineprototype.Enum.Role;
-import com.saku.onlineprototype.entity.Campus;
-import com.saku.onlineprototype.entity.Faculty;
-import com.saku.onlineprototype.entity.Organization;
-import com.saku.onlineprototype.entity.User;
+
+import com.saku.onlineprototype.entity.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -48,7 +43,7 @@ public class UserResponse {
                 .setCampus(user.getCampus())
                 .setCreateDate(user.getCreateDate())
                 .setLastUpdateTimestamp(user.getLastUpdateTimestamp())
-                .setRole(user.getRole())
+                .setRole((Role) user.getRole())
                 .setOrg(user.getOrg())
                 .setPosition(user.getPosition());
     }

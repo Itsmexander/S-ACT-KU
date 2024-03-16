@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 //import com.saku.onlineprototype.Enum.Faculty;
 import com.saku.onlineprototype.Enum.Position;
-import com.saku.onlineprototype.Enum.Role;
-import com.saku.onlineprototype.entity.Campus;
-import com.saku.onlineprototype.entity.Faculty;
-import com.saku.onlineprototype.entity.Organization;
-import com.saku.onlineprototype.entity.Schedule;
+
+import com.saku.onlineprototype.entity.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
