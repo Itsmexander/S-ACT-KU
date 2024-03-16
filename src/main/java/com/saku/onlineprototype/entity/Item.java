@@ -11,7 +11,7 @@ import org.hibernate.annotations.Fetch;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "item")
 public class Item {
 
     @Id
@@ -19,16 +19,16 @@ public class Item {
     @Column(name = "itemID")
     private Long itemID;
 
-    @Column(name = "itemNumber")
+    @Column(name = "item_Number")
     private int itemNumber;
 
-    @Column(name = "itemDescription")
+    @Column(name = "item_Description")
     private String itemDescription;
 
     @Column(name = "price")
     private double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "itemListID")
+    @JoinColumn(name = "item_ListID")
     private ItemList itemList;
 }

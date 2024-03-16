@@ -23,8 +23,8 @@ public class ActivityRequest {
     private String status;
     private String projNameTH;
     private String projNameEN;
-    private String orgType;
-    private String orgName;
+//    private String orgType;
+//    private String orgName;
     private LocalDateTime activityStartDateTime;
     private LocalDateTime activityEndDateTime;
     private String activityLocation;

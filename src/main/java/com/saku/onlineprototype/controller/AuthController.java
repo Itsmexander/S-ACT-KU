@@ -1,8 +1,13 @@
 package com.saku.onlineprototype.controller;
 
+import com.saku.onlineprototype.dto.AuthCheckRequest;
+import com.saku.onlineprototype.entity.User;
 import com.saku.onlineprototype.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -11,8 +16,21 @@ public class AuthController {
     private UserRepository userRepository;
 
     @PostMapping("/auth/check")
-    public boolean checkUID(@RequestBody String uid) {
-        return userRepository.findById(uid).isPresent();
+    public boolean checkUID(@RequestBody AuthCheckRequest authCheckRequest) {
+        System.out.println(authCheckRequest.getUid());
+        if (userRepository.findByUid(authCheckRequest.getUid()).isPresent()){
+            System.out.println("true");
+            return userRepository.findByUid(authCheckRequest.getUid()).isPresent();
+        }else {
+            System.out.println("false");
+            return userRepository.findByUid(authCheckRequest.getUid()).isPresent();
+        }
+//        return userRepository.findByUid(uid).isPresent();
+    }
+
+    @GetMapping("/getAllUser")
+    public Optional<User> getAllUser(){
+        return userRepository.findByUid("b6210451098");
     }
 //    @GetMapping("/login")
 //    public String loginView() {

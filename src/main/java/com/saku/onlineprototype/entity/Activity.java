@@ -1,8 +1,6 @@
 package com.saku.onlineprototype.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,48 +21,57 @@ public class Activity {
     private String activityID;
     @Column(name = "status")
     private String status;
-    @Column(name = "ProjectNameTH")
+    @Column(name = "Project_NameTH")
     private String projNameTH;
-    @Column(name = "ProjectNameEN")
+    @Column(name = "Project_NameEN")
     private String projNameEN;
-    @Column(name = "OrgType")
-    private String orgType;
-    @Column(name = "OrgName")
-    private String orgName;
-    @Column(name = "ActivityStartDateTime")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org",nullable = false)
+    private Organization organization;
+
+//    @Column(name = "Org_Type")
+//    private String orgType;
+//    @Column(name = "Org_Name")
+//    private String orgName;
+
+    @Column(name = "Activity_Start_Date_Time")
     private LocalDateTime activityStartDateTime;
-    @Column(name = "ActivityEndDateTime")
+    @Column(name = "Activity_End_Date_Time")
     private LocalDateTime activityEndDateTime;
-    @Column(name = "ActivityLocation")
+    @Column(name = "Activity_Location")
     private String activityLocation;
-    @Column(name = "ActivityDescription",length = 1000)
+    @Column(name = "Activity_Description",length = 1000)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String activityDescription;
-    @Column(name = "AllocatedMoney(FY)")
+
+    @Column(name = "Allocated_Money(FY)")
     private double allocatedMoneyFY;
-    @Column(name = "AllocatedMoney(Addition)")
+    @Column(name = "Allocated_Money(Addition)")
     private double allocatedMoneyAddition;
-    @Column(name = "AllocatedMoney(Ex)")
+    @Column(name = "Allocated_Money(Ex)")
     private double allocatedMoneyEx;
-    @Column(name = "UsedAllocate")
+    @Column(name = "Used_Allocate")
     private double usedAllocate;
-    @Column(name = "StaffTargetNum")
+
+    @Column(name = "Staff_Target_Num")
     private int staffTargetNum;
-    @Column(name = "AttendTargetNum")
+    @Column(name = "Attend_Target_Num")
     private int attendTargetNum;
-    @Column(name = "StaffAttendedNum")
+    @Column(name = "Staff_Attended_Num")
     private int staffAttendedNum;
-    @Column(name = "AttendNum")
+    @Column(name = "Attend_Num")
     private int attendedNum;
-    @Column(name = "StaffAttendedtPerc")
+    @Column(name = "Staff_Attended_Perc")
     private double staffAttendedPerc;
-    @Column(name = "AttendPerc")
+    @Column(name = "Attend_Perc")
     private double attendedPerc;
-    @Column(name = "StaffApproveRate")
+    @Column(name = "Staff_Approve_Rate")
     private double staffApproveRate;
-    @Column(name = "AttendedApproveRate")
+    @Column(name = "Attended_Approve_Rate")
     private double attendedApproveRate;
-    @Column(name = "ActivityHour")
+
+    @Column(name = "Activity_Hour")
     private int activityHour;
     @Column(name = "IDKUType")
     private String idkuType;
@@ -72,6 +79,6 @@ public class Activity {
     private String tqfType;
     @Column(name = "SDGs")
     private String sdgTypes;
-    @Column(name = "KingsPhilosophyType")
+    @Column(name = "Kings_Philosophy_Type")
     private String kingPhilosophyType;
 }

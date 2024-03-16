@@ -1,6 +1,6 @@
 package com.saku.onlineprototype.entity;
 
-import com.saku.onlineprototype.Enum.Faculty;
+//import com.saku.onlineprototype.Enum.Faculty;
 import com.saku.onlineprototype.Enum.Position;
 import com.saku.onlineprototype.Enum.Role;
 import jakarta.persistence.*;
@@ -28,26 +28,30 @@ public class User {
     @Id
     @Column(name = "uid")
     private String uid;
-    @Column(name = "password")
-    private String password;
     @Column(name = "Name")
     private String name;
-    @Column(name = "TelNo")
+    @Column(name = "year")
+    private int year;
+    @Column(name = "tel_no")
     private String telNo;
-    @Column(name = "CreateDate")
-    private LocalDateTime createDate;
-    @Column(name = "LastUpdateTimestamp")
-    private LocalDateTime lastUpdateTimestamp;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty")
+    private Faculty faculty;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campus")
+    private Campus campus;
+    @Column(name = "create_date")
+    private String createDate;
+    @Column(name = "Last_Update_Timestamp")
+    private String lastUpdateTimestamp;
     @Enumerated(EnumType.STRING)
     @Column(name= "role")
     private Role role;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "faculty")
-    private Faculty faculty;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Org",nullable = false)
     private Organization org;
-    @Column(name = "postition")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     private Position position;
 //    @LastModifiedDate
 //    @Column(name = "LastModifiedTimeStamp")

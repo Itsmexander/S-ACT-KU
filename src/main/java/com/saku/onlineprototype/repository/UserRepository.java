@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,String> {
     Optional<User> findByUid(String uid);
     Optional<User> findByRole(Role role);
-    Optional<User> findByCreateDateAfter(LocalDateTime dateTime);
-    Optional<User> findByCreateDateBefore(LocalDateTime dateTime);
-    Optional<User> findByCreateDateBetween(LocalDateTime dateTime,LocalDateTime dateTime2);
+//    Optional<User> findByCreateDateAfter(LocalDateTime dateTime);
+//    Optional<User> findByCreateDateBefore(LocalDateTime dateTime);
+//    Optional<User> findByCreateDateBetween(LocalDateTime dateTime,LocalDateTime dateTime2);
 }

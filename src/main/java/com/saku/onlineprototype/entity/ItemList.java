@@ -15,7 +15,7 @@ import java.util.List;
 @Entity(name = "Itemlist")
 public class ItemList {
     @Id
-    @Column(name = "itemListID")
+    @Column(name = "item_ListID")
     private String listID;
 
     @OneToOne(fetch = FetchType.LAZY)
