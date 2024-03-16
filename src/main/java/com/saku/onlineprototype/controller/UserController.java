@@ -13,25 +13,25 @@ import java.lang.reflect.InvocationTargetException;
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) throws InvocationTargetException, IllegalAccessException {
         UserResponse response =userService.createUser(request);
         return  ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/user/{uID}")
+    @GetMapping("/{uID}")
     public ResponseEntity<UserResponse> getUser(@PathVariable String uID){
         UserResponse response = userService.getUser(uID);
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/user/{uID}")
+    @PutMapping("/{uID}")
     public  ResponseEntity<UserResponse> updateUser(@PathVariable String uID, @RequestBody UserRequest request){
         UserResponse response = userService.updateUser(uID, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
