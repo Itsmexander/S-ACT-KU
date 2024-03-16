@@ -32,6 +32,7 @@ public class ActivityServiceImpl implements ActivityService {
     public ActivityResponse createActivity(ActivityRequest request) throws InvocationTargetException, IllegalAccessException {
         Activity activity = new Activity();
         copyProperties(request,activity);
+        activity = saveActivity(activity);
         return ActivityResponse.from(activity);
     }
 
@@ -48,7 +49,7 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setProjNameEN(request.getProjNameEN());
         activity.setActivityStartDateTime(request.getActivityStartDateTime());
         activity.setActivityEndDateTime(request.getActivityEndDateTime());
-        activity.setActivityID(request.getActivityLocation());
+        activity.setActivityLocation(request.getActivityLocation());
         activity.setActivityDescription(request.getActivityDescription());
         activity.setAllocatedMoneyFY(request.getAllocatedMoneyFY());
         activity.setAllocatedMoneyAddition(request.getAllocatedMoneyAddition());
